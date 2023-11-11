@@ -74,7 +74,7 @@
                             <includes>
                                 <include>**/*IntegrationTest.java</include>
                             </includes>
-                            <forkMode>once</forkMode>
+                            <!--<forkMode>once</forkMode>-->
                         </configuration>
                     </plugin>
                     <plugin>
@@ -95,6 +95,10 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <!--
+                        mvn -P with-integration-tests verify
+                        mvn -P with-integration-tests jacoco:report
+                    -->
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
@@ -105,10 +109,11 @@
                                 <goals>
                                     <goal>prepare-agent</goal>
                                 </goals>
+                                <phase>pre-integration-test</phase>
                             </execution>
                             <execution>
                                 <id>report</id>
-                                <phase>integration-test</phase>
+                                <phase>prepare-package</phase>
                                 <goals>
                                     <goal>report</goal>
                                 </goals>
